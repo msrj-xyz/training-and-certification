@@ -304,11 +304,41 @@
 
 ## Exam Tips for Domain 2
 
-1. **Target Tracking** - Preferred scaling policy for most use cases
-2. **Warm-up Period** - Critical for preventing premature scaling
-3. **ALB vs NLB** - ALB for HTTP, NLB for TCP/UDP and static IP
-4. **Route 53 Failover** - Requires health checks
-5. **RTO vs RPO** - Know the difference and strategies
-6. **Multi-AZ RDS** - Synchronous replication, automatic failover
-7. **AWS Backup** - Centralized backup for multiple services
-8. **S3 Versioning** - Enable before replication
+1. **Scaling policy priority:**
+   - Target Tracking = preferred for most use cases
+   - Predictive Scaling = recurring patterns
+   - Step Scaling = tiered response needed
+2. **Warm-up and cooldown:**
+   - Warm-up = time before new instance metrics count
+   - Cooldown = prevents rapid scaling
+   - Critical for preventing premature scaling
+3. **Load Balancer selection:**
+   - ALB = HTTP/HTTPS, path-based routing
+   - NLB = TCP/UDP, static IP, ultra-low latency
+   - GWLB = third-party appliances
+4. **Route 53 failover:**
+   - Requires health checks
+   - Primary/Secondary record setup
+5. **RTO vs RPO understanding:**
+   - RTO = how fast you recover
+   - RPO = how much data you can lose
+6. **DR strategy order (cost/complexity):**
+   - Backup & Restore (cheapest, slowest)
+   - Pilot Light (minimal always-on)
+   - Warm Standby (scaled-down env)
+   - Multi-site Active-Active (most expensive, fastest)
+7. **Multi-AZ RDS:**
+   - Synchronous replication
+   - Automatic failover (1-2 min)
+   - Standby not readable (use Read Replicas for that)
+8. **AWS Backup:**
+   - Centralized backup for multiple services
+   - Cross-region and cross-account capable
+9. **S3 data protection:**
+   - Versioning = enable before replication
+   - Object Lock Compliance = even root can't delete
+   - MFA Delete = extra protection
+10. **Lifecycle hooks:**
+    - Launch hooks = install software, register
+    - Terminate hooks = backup data, deregister
+

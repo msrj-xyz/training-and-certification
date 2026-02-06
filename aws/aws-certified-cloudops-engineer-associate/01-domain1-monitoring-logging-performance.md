@@ -95,6 +95,30 @@
 - API Gateway logs
 - ECS/EKS container logs
 
+#### CloudWatch Logs Insights Query Examples
+```
+# Find errors in last hour
+fields @timestamp, @message
+| filter @message like /ERROR/
+| sort @timestamp desc
+| limit 100
+
+# Count requests by status code
+fields @timestamp, status
+| stats count(*) by status
+
+# Find slowest requests
+fields @timestamp, @duration
+| sort @duration desc
+| limit 20
+
+# Parse and aggregate
+parse @message "* * * * * *" as ip, id, user, time, request, status
+| stats count(*) by ip
+```
+
+> **Exam Tip:** Logs Insights uses a custom query language - familiarize with basic syntax!
+
 ---
 
 ### CloudWatch Dashboards
@@ -292,11 +316,40 @@
 
 ## Exam Tips for Domain 1
 
-1. **CloudWatch Agent** - Required for memory and disk metrics
-2. **Composite Alarms** - Reduce alarm noise, combine conditions
-3. **EventBridge** - Preferred over CloudWatch Events
-4. **Systems Manager Automation** - Know common runbooks
-5. **EBS Volume Types** - Match IOPS requirements
-6. **RDS Performance Insights** - First tool for database issues
-7. **S3 Transfer Acceleration** - For long-distance uploads
-8. **Placement Groups** - Know when to use each type
+1. **CloudWatch Agent requirements:**
+   - Memory metrics = requires agent
+   - Disk space = requires agent
+   - CPU, Network = default metrics (no agent)
+2. **Alarm configurations:**
+   - Composite alarms = reduce noise, combine conditions
+   - Anomaly detection = ML-based thresholds
+   - Missing data = treat as INSUFFICIENT_DATA by default
+3. **EventBridge patterns:**
+   - Preferred over CloudWatch Events
+   - Supports partner events, scheduled rules
+4. **Systems Manager Automation:**
+   - Know common runbooks (AWS-StopEC2Instance, etc.)
+   - Rate control prevents blast radius
+5. **EBS volume types:**
+   - gp3 = general purpose (most workloads)
+   - io2 = high IOPS databases
+   - st1 = throughput (big data)
+   - High queue length = I/O bottleneck
+6. **RDS Performance Insights:**
+   - First tool for database performance issues
+   - AAS (Average Active Sessions) key metric
+7. **S3 optimization:**
+   - Transfer Acceleration = long-distance uploads
+   - Multipart upload = large files (>100MB)
+8. **Placement Groups:**
+   - Cluster = low latency, HPC
+   - Spread = HA, max 7 per AZ
+   - Partition = large distributed (HDFS, Kafka)
+9. **CloudTrail:**
+   - Management events = control plane
+   - Data events = S3/Lambda data access
+10. **Metric resolution:**
+    - Standard = 5 minutes (free)
+    - Detailed = 1 minute (extra cost)
+    - High-resolution = 1 second (custom metrics)
+

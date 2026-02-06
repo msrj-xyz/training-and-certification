@@ -272,11 +272,44 @@
 
 ## Exam Tips for Domain 3
 
-1. **EC2 Image Builder** - Automate AMI creation pipeline
-2. **CloudFormation StackSets** - Multi-account/region deployments
-3. **CDK** - Know it synthesizes to CloudFormation
-4. **Systems Manager** - Core service for operations
-5. **Session Manager** - No SSH keys, no inbound ports
-6. **Patch Manager** - Patch baselines and maintenance windows
-7. **Parameter Store** - Configuration; Secrets Manager - credentials
-8. **EventBridge** - Central event routing for automation
+1. **EC2 Image Builder:**
+   - Automates AMI creation
+   - Recipe = what to install
+   - Pipeline = scheduled builds
+2. **CloudFormation StackSets:**
+   - Multi-account/region deployments
+   - Service-managed = Organizations integration
+   - Self-managed = IAM roles you create
+3. **CloudFormation troubleshooting:**
+   - UPDATE_ROLLBACK_FAILED = skip resources or manual fix
+   - DependsOn = control creation order
+   - Change Set = preview before apply
+   - Drift Detection = find manual changes
+4. **CDK knowledge:**
+   - Synthesizes to CloudFormation
+   - Constructs = L1 (raw), L2 (sensible defaults), L3 (patterns)
+   - `cdk diff` = show changes
+5. **Systems Manager core:**
+   - Session Manager = no SSH/RDP needed, no inbound ports
+   - Run Command = execute scripts across fleet
+   - Patch Manager = patch baselines + maintenance windows
+6. **Parameter Store vs Secrets Manager:**
+   - Parameter Store = configuration, free tier
+   - Secrets Manager = credentials, auto-rotation
+7. **EventBridge automation:**
+   - Central event routing
+   - Cron/rate expressions for scheduling
+   - Partner events from SaaS
+8. **Deployment strategies:**
+   - Blue/Green = lowest risk
+   - Immutable = new instances, swap
+   - Rolling = deploy in batches
+   - Canary = small percentage first
+9. **AWS RAM:**
+   - Share subnets, Transit Gateways
+   - Cross-account resource sharing
+10. **Lambda triggers:**
+    - S3 events = object created/deleted
+    - DynamoDB Streams = table changes
+    - EventBridge = scheduled/event-driven
+

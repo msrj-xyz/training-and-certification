@@ -38,6 +38,28 @@
 | **Underfitting** | Model too simple | Poor performance across all data |
 | **High Variance** | Sensitive to training data changes | Unstable predictions |
 
+#### Bias Mitigation Techniques
+
+| Stage | Technique | Description |
+|-------|-----------|-------------|
+| **Pre-processing** | Re-sampling | Balance underrepresented groups |
+| **Pre-processing** | Data augmentation | Generate diverse examples |
+| **In-processing** | Adversarial de-biasing | Train to reduce bias |
+| **In-processing** | Fairness constraints | Add fairness to loss function |
+| **Post-processing** | Threshold adjustment | Adjust decision thresholds per group |
+| **Post-processing** | Calibration | Equalize error rates |
+
+#### Fairness Metrics
+
+| Metric | Description | Formula |
+|--------|-------------|--------|
+| **Demographic Parity** | Equal positive rate across groups | P(Y=1|A=0) = P(Y=1|A=1) |
+| **Equalized Odds** | Equal TPR and FPR across groups | Same TPR, FPR for all groups |
+| **Equal Opportunity** | Equal TPR across groups | Same TPR for all groups |
+| **Predictive Parity** | Equal PPV across groups | Same precision for all groups |
+
+> **Exam Tip:** Know that no single fairness metric works for all scenarios - there are trade-offs!
+
 ---
 
 ### Legal Risks of GenAI
@@ -96,6 +118,26 @@
 | **Amazon A2I** | Human review for low-confidence predictions |
 | **Bedrock Guardrails** | Real-time content filtering, topic denial |
 
+#### Amazon Bedrock Guardrails Deep Dive
+
+| Feature | Description | Configuration |
+|---------|-------------|---------------|
+| **Content Filters** | Block harmful content | Hate, violence, sexual, profanity |
+| **Denied Topics** | Block specific subjects | Custom topic definitions |
+| **Word Filters** | Block specific words/phrases | Offensive language |
+| **PII Handling** | Detect/redact personal info | Names, emails, phone numbers |
+| **Grounding Check** | Verify factual accuracy | RAG source verification |
+| **Contextual Grounding** | Response aligns with context | Reduce hallucinations |
+
+#### Guardrails Content Filter Levels
+
+| Level | Description |
+|-------|-------------|
+| **None** | No filtering |
+| **Low** | Block severe violations |
+| **Medium** | Block moderate violations |
+| **High** | Block most violations |
+
 ### Detection Approaches
 
 | Approach | Description |
@@ -130,6 +172,18 @@
 | **Feature Importance** | Which inputs matter most |
 | **Counterfactual Explanations** | What would change the outcome |
 | **Attribution** | Which input parts influenced output |
+
+#### Explainability Methods
+
+| Method | Type | Description | AWS Tool |
+|--------|------|-------------|----------|
+| **SHAP** | Model-agnostic | Game theory-based feature importance | SageMaker Clarify |
+| **LIME** | Model-agnostic | Local interpretable explanations | SageMaker Clarify |
+| **Partial Dependence** | Model-agnostic | Feature effect visualization | SageMaker Clarify |
+| **Attention Visualization** | Neural networks | See which inputs model focuses on | Custom |
+| **Decision Trees** | Inherently interpretable | Rule-based explanations | - |
+
+> **Exam Tip:** SHAP is the primary explainability method in SageMaker Clarify!
 
 ---
 
@@ -206,11 +260,31 @@
 
 ## Exam Tips for Domain 4
 
-1. **Know the features:** Fairness, bias, safety, veracity, transparency, explainability
-2. **Understand bias sources:** Data bias, selection bias, algorithm bias
-3. **Legal risks matter:** IP infringement, hallucinations, loss of trust
-4. **AWS tools mapping:** Clarify for bias detection, A2I for human review, Guardrails for filtering
-5. **Model Cards purpose:** Documentation for transparency and governance
-6. **Trade-offs are real:** Interpretability vs. performance, transparency vs. security
-7. **Human-in-the-loop:** Know when and how to involve humans
-8. **Environmental considerations:** Sustainability is part of responsible AI
+1. **Know responsible AI features:**
+   - Fairness, bias, safety, veracity
+   - Transparency, explainability, robustness
+2. **Bias sources and mitigation:**
+   - Data bias → Re-sampling, augmentation
+   - Algorithm bias → Fairness constraints
+   - Post-processing → Threshold adjustment
+3. **Legal risks of GenAI:**
+   - IP infringement, hallucinations
+   - Loss of trust, privacy violations
+4. **AWS tools mapping:**
+   - Clarify = bias detection + SHAP explanations
+   - A2I = human review workflows
+   - Guardrails = content filtering, PII protection
+   - Model Cards = documentation
+5. **Guardrails features:**
+   - Content filters (hate, violence, etc.)
+   - Denied topics, word filters
+   - PII handling (detect/redact)
+   - Grounding check for RAG
+6. **Fairness metrics:** Know trade-offs between different metrics
+7. **Explainability:** SHAP for feature importance, global vs local explanations
+8. **Human-in-the-loop patterns:**
+   - Active learning, review workflows
+   - A2I for low-confidence predictions
+9. **Model Cards:** Document intended use, limitations, ethical considerations
+10. **Environmental AI:** Consider carbon footprint and sustainability
+

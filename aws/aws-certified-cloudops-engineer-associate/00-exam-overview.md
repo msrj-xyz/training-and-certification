@@ -175,3 +175,4 @@
 - [Domain 3: Deployment, Provisioning, and Automation](./03-domain3-deployment-automation.md)
 - [Domain 4: Security and Compliance](./04-domain4-security-compliance.md)
 - [Domain 5: Networking and Content Delivery](./05-domain5-networking-content-delivery.md)
+- [**Quick Reference Card (1-page summary)**](./06-quick-reference-card.md)

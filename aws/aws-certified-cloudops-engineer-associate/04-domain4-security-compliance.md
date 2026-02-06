@@ -284,11 +284,46 @@
 
 ## Exam Tips for Domain 4
 
-1. **Policy Evaluation** - Explicit Deny > Explicit Allow > Implicit Deny
-2. **Permission Boundaries** - Maximum permissions, not grants
-3. **SCPs** - Do not apply to management account
-4. **IAM Access Analyzer** - Find unintended external access
-5. **KMS** - Know CMK vs AWS managed vs AWS owned
-6. **Secrets Manager** - Automatic rotation, cross-account
-7. **Security Hub** - Aggregates findings from multiple services
-8. **Config Rules** - Evaluate compliance, auto-remediate
+1. **IAM policy evaluation order:**
+   - Explicit Deny → Explicit Allow → Implicit Deny
+   - Deny always wins
+2. **Permission Boundaries:**
+   - Maximum permissions, NOT grants
+   - Used to delegate administration safely
+3. **Service Control Policies (SCPs):**
+   - Do NOT apply to management account
+   - Do NOT grant permissions, only restrict
+   - Inherited from parent OUs
+4. **IAM Access Analyzer:**
+   - Find unintended external access
+   - Policy validation before deployment
+5. **KMS key types:**
+   - AWS Managed = AWS creates/manages
+   - Customer Managed (CMK) = you control
+   - AWS Owned = shared, invisible
+6. **Envelope encryption:**
+   - Data key encrypts data
+   - Master key encrypts data key
+   - GenerateDataKey API
+7. **Secrets Manager benefits:**
+   - Automatic rotation (Lambda-based)
+   - Cross-account sharing
+   - Native RDS/Redshift integration
+8. **Security Hub:**
+   - Aggregates findings from GuardDuty, Inspector, Macie
+   - CIS, PCI DSS, AWS Foundational standards
+   - EventBridge integration for automation
+9. **AWS Config:**
+   - Configuration compliance evaluation
+   - Auto-remediation with SSM Automation
+   - Aggregator for multi-account view
+10. **GuardDuty data sources:**
+    - CloudTrail, VPC Flow Logs, DNS logs
+    - S3 protection, EKS audit logs
+11. **ACM certificates:**
+    - Free for AWS services (ELB, CloudFront, API Gateway)
+    - Auto-renewal for AWS-issued certs
+12. **MFA enforcement:**
+    - Use aws:MultiFactorAuthPresent condition
+    - Required for sensitive operations
+

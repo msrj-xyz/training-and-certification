@@ -239,11 +239,44 @@
 
 ## Exam Tips for Domain 1
 
-1. **Parquet Format** - Preferred for analytical workloads
-2. **Feature Store** - Online for inference, Offline for training
-3. **Ground Truth** - Know auto-labeling and active learning
-4. **Clarify** - Pre-training and post-training bias detection
-5. **Glue** - ETL, crawlers, Data Catalog
-6. **Data Wrangler** - Quick data exploration and transformation
-7. **Imbalanced Data** - SMOTE, class weights, stratified sampling
-8. **Streaming** - Kinesis for real-time, Firehose for loading
+1. **Data format selection:**
+   - Parquet = preferred for ML (columnar, compressed)
+   - RecordIO = SageMaker native, most efficient
+   - CSV = simple but inefficient for large data
+2. **Feature Store usage:**
+   - Online Store = real-time inference (low latency)
+   - Offline Store = training data (S3-backed)
+   - Feature Groups = logical grouping
+3. **SageMaker Ground Truth:**
+   - Auto-labeling = reduces cost 70%
+   - Active learning = smart sample selection
+   - A2I = human review workflows
+4. **SageMaker Clarify:**
+   - Pre-training bias = data distribution issues
+   - Post-training bias = prediction fairness
+   - SHAP values = feature importance
+5. **AWS Glue capabilities:**
+   - ETL jobs = serverless Spark
+   - Crawlers = auto-discover schemas
+   - Data Catalog = metadata repository
+   - Job bookmarks = incremental processing
+6. **Data Wrangler usage:**
+   - 300+ built-in transformations
+   - Visual exploration
+   - Export to Feature Store or Pipelines
+7. **Addressing imbalanced data:**
+   - SMOTE = synthetic oversampling
+   - Class weights = loss function adjustment
+   - Stratified sampling = maintain proportions
+8. **Streaming data:**
+   - Kinesis Data Streams = real-time, custom processing
+   - Kinesis Firehose = auto-load to S3/Redshift
+   - MSK = high-throughput Kafka
+9. **Data quality:**
+   - AWS Glue Data Quality = rule-based validation
+   - Completeness, uniqueness, validity checks
+10. **SageMaker Processing:**
+    - Data preprocessing at scale
+    - Can use Spark or Scikit-learn containers
+    - Pipe Mode = stream data, don't download
+

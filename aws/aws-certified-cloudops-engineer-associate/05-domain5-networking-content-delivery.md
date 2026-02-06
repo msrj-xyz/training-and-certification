@@ -319,11 +319,44 @@
 
 ## Exam Tips for Domain 5
 
-1. **Security Groups vs NACLs** - SG stateful, NACL stateless
-2. **NAT Gateway** - AZ-specific, deploy in each AZ
-3. **Gateway vs Interface Endpoints** - Gateway for S3/DynamoDB only
-4. **Alias vs CNAME** - Alias for zone apex
-5. **VPC Flow Logs** - REJECT = blocked by SG or NACL
-6. **Reachability Analyzer** - No packets, configuration analysis
-7. **CloudFront vs Global Accelerator** - Caching vs TCP/UDP
-8. **Transit Gateway** - Hub for multiple VPCs and VPNs
+1. **Security Groups vs NACLs:**
+   - SG = stateful, allow only, instance level
+   - NACL = stateless, allow/deny, subnet level
+   - NACL needs ephemeral port rules (1024-65535)
+2. **NAT Gateway:**
+   - AZ-specific, deploy in each AZ for HA
+   - No security groups, control with NACLs
+   - 5 Gbps baseline, up to 100 Gbps
+3. **VPC Endpoints:**
+   - Gateway = S3, DynamoDB only (FREE)
+   - Interface = most other services (cost per hour)
+4. **Route 53 records:**
+   - Alias = zone apex (example.com), AWS resources
+   - CNAME = cannot be zone apex
+5. **VPC Flow Logs analysis:**
+   - REJECT = blocked by SG or NACL
+   - Check both inbound and outbound rules
+6. **VPC Reachability Analyzer:**
+   - No packets sent, configuration analysis only
+   - Identifies blocking components
+7. **CloudFront vs Global Accelerator:**
+   - CloudFront = HTTP/HTTPS, caching
+   - Global Accelerator = TCP/UDP, static IP, no caching
+8. **Transit Gateway:**
+   - Hub for multiple VPCs and VPNs
+   - Route tables control traffic
+   - Cross-region peering available
+9. **Subnet sizing:**
+   - AWS reserves 5 IPs per subnet
+   - /28 = 11 usable, /24 = 251 usable
+10. **DNS troubleshooting:**
+    - Check VPC DNS settings (enableDnsHostnames, enableDnsSupport)
+    - DHCP option sets for custom DNS
+11. **Private connectivity options:**
+    - VPC Peering = simple, non-transitive
+    - Transit Gateway = scalable, transitive
+    - PrivateLink = expose services privately
+12. **Hybrid connectivity:**
+    - Site-to-Site VPN = quick, encrypted, internet-dependent
+    - Direct Connect = consistent, higher bandwidth, takes weeks
+

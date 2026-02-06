@@ -28,7 +28,67 @@
 | **Why they matter** | Affect cost, context limits, response length |
 | **Token limits** | Maximum input + output tokens per request |
 
+#### Tokenization Methods
+
+| Method | Description | Example |
+|--------|-------------|---------|
+| **Byte Pair Encoding (BPE)** | Merge frequent character pairs | Most LLMs (GPT, Claude) |
+| **WordPiece** | Similar to BPE, used by BERT | BERT, DistilBERT |
+| **SentencePiece** | Language-agnostic tokenization | Multilingual models |
+
+#### Token Calculation Examples
+
+| Text | Approximate Tokens |
+|------|--------------------|
+| "Hello world" | 2 tokens |
+| "Artificial intelligence" | 3-4 tokens |
+| 1 page of text (~500 words) | ~375 tokens |
+| 1000 words | ~750 tokens |
+
 > **Exam Tip:** Understand that token-based pricing affects cost management decisions.
+
+---
+
+### Transformer Architecture
+
+| Component | Description | Purpose |
+|-----------|-------------|---------|
+| **Self-Attention** | Weighs importance of each token | Understanding relationships |
+| **Multi-Head Attention** | Multiple attention in parallel | Capture different patterns |
+| **Positional Encoding** | Adds position information | Sequence understanding |
+| **Feed-Forward Networks** | Process attention outputs | Feature transformation |
+| **Layer Normalization** | Stabilizes training | Better convergence |
+| **Encoder** | Processes input sequence | Understanding context |
+| **Decoder** | Generates output sequence | Text generation |
+
+#### Attention Mechanism
+
+```
+Query × Key → Attention Weights → Weights × Value → Output
+```
+
+> **Exam Tip:** Know that "Attention is All You Need" paper introduced Transformers - foundation of modern LLMs!
+
+---
+
+### Embeddings Deep Dive
+
+| Concept | Description | Use Case |
+|---------|-------------|----------|
+| **Word Embeddings** | Words as vectors | NLP tasks |
+| **Sentence Embeddings** | Entire sentences as vectors | Semantic search |
+| **Document Embeddings** | Full documents as vectors | Document retrieval |
+| **Image Embeddings** | Images as vectors | Visual search |
+| **Multimodal Embeddings** | Combined text+image vectors | Cross-modal search |
+
+#### Why Embeddings Matter
+
+| Property | Benefit |
+|----------|--------|
+| **Semantic Similarity** | Similar meanings = close vectors |
+| **Dimensionality** | Fixed-size representation |
+| **Computability** | Math operations on meaning |
+| **Transfer Learning** | Reuse across tasks |
 
 ---
 
@@ -64,18 +124,20 @@
 ### Foundation Model Lifecycle
 
 ```
-Data Selection → Model Selection → Pre-training → Fine-tuning → Evaluation → Deployment → Feedback
+ Data Selection → Model Selection → Pre-training → Fine-tuning → Evaluation → Deployment → Feedback
+        ↑                                                                              |
+        └──────────────────────────────────────────────────────────────────────────────┘
 ```
 
-| Stage | Description |
-|-------|-------------|
-| **Data Selection** | Choosing training data quality and diversity |
-| **Model Selection** | Picking base model architecture |
-| **Pre-training** | Initial training on large datasets |
-| **Fine-tuning** | Customizing for specific tasks/domains |
-| **Evaluation** | Testing performance and safety |
-| **Deployment** | Making model available for use |
-| **Feedback** | Collecting user feedback for improvement |
+| Stage | Description | AWS Service |
+|-------|-------------|-------------|
+| **Data Selection** | Choosing training data quality and diversity | S3, Glue |
+| **Model Selection** | Picking base model architecture | Bedrock, SageMaker |
+| **Pre-training** | Initial training on large datasets | SageMaker Training |
+| **Fine-tuning** | Customizing for specific tasks/domains | Bedrock Custom Models |
+| **Evaluation** | Testing performance and safety | Bedrock Model Evaluation |
+| **Deployment** | Making model available for use | Bedrock, SageMaker Endpoints |
+| **Feedback** | Collecting user feedback for improvement | CloudWatch, A2I |
 
 ---
 
@@ -226,9 +288,30 @@ Data Selection → Model Selection → Pre-training → Fine-tuning → Evaluati
 
 ## Exam Tips for Domain 2
 
-1. **Know token concepts:** Understanding tokens is fundamental to cost and limit calculations
-2. **Memorize hallucination mitigation:** RAG is the primary answer for grounding responses
-3. **Understand trade-offs:** Cost vs. latency, accuracy vs. speed
-4. **Know Amazon Bedrock features:** Knowledge Bases, Agents, Guardrails are key
-5. **Match services to use cases:** Bedrock for FMs, Q for assistance, SageMaker for custom ML
-6. **Remember business metrics:** GenAI is about business value, not just technical metrics
+1. **Token fundamentals:**
+   - 1 token ≈ 4 characters or ¾ word
+   - Token-based pricing affects cost calculations
+   - Longer prompts = more cost
+2. **Know hallucination mitigation:** RAG is the primary answer for grounding responses
+3. **Transformer architecture:** Know attention mechanism is the key innovation
+4. **Temperature settings:**
+   - Low (0-0.3) = factual, deterministic
+   - High (0.8-1.0) = creative, varied
+5. **Amazon Bedrock features:**
+   - Knowledge Bases = RAG implementation
+   - Agents = multi-step automation
+   - Guardrails = safety/content filtering
+6. **FM Provider matching:**
+   - Anthropic Claude = reasoning, safety
+   - Amazon Titan = embeddings, general purpose
+   - Stability AI = image generation
+7. **Pricing models:**
+   - On-demand = experimentation, variable load
+   - Provisioned = production, consistent load
+8. **Embeddings purpose:**
+   - Convert text to vectors
+   - Enable semantic search
+   - Power RAG retrieval
+9. **Business metrics matter:** GenAI is about business value, not just technical metrics
+10. **Context window limits:** Understand token limits affect what you can process
+

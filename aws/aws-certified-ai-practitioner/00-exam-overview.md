@@ -57,62 +57,78 @@
 
 ---
 
-## In-Scope AWS Services (Quick Reference)
+## In-Scope AWS Services (Complete List)
+
+> ⭐ = High-priority service (frequently tested)
 
 ### Machine Learning Services
-| Service | Primary Use Case |
-|---------|------------------|
-| Amazon Bedrock | Foundation Models, GenAI applications |
-| Amazon SageMaker AI | End-to-end ML platform |
-| Amazon Q Developer | AI-powered coding assistance |
-| Amazon Q Business | AI assistant for enterprise |
-| Amazon Comprehend | NLP text analysis |
-| Amazon Transcribe | Speech to text |
-| Amazon Translate | Language translation |
-| Amazon Polly | Text to speech |
-| Amazon Lex | Conversational AI (chatbots) |
-| Amazon Rekognition | Image and video analysis |
-| Amazon Textract | Document text extraction |
-| Amazon Kendra | Intelligent enterprise search |
-| Amazon Personalize | Recommendation engine |
-| Amazon Fraud Detector | Fraud detection |
-| Amazon Augmented AI (A2I) | Human review workflows |
-| Amazon Nova | AWS foundation models |
+| Service | Primary Use Case | Priority |
+|---------|------------------|----------|
+| **Amazon Bedrock** | Foundation Models, GenAI, Knowledge Bases, Agents, Guardrails | ⭐⭐⭐ |
+| **Amazon SageMaker AI** | End-to-end ML platform, Clarify, Model Monitor | ⭐⭐⭐ |
+| **Amazon Q Developer** | AI-powered coding assistance | ⭐⭐ |
+| **Amazon Q Business** | AI assistant for enterprise knowledge | ⭐⭐ |
+| **Amazon Comprehend** | NLP text analysis, sentiment, entities | ⭐⭐ |
+| **Amazon Transcribe** | Speech to text | ⭐ |
+| **Amazon Translate** | Language translation | ⭐ |
+| **Amazon Polly** | Text to speech | ⭐ |
+| **Amazon Lex** | Conversational AI (chatbots) | ⭐⭐ |
+| **Amazon Rekognition** | Image and video analysis | ⭐⭐ |
+| **Amazon Textract** | Document text extraction (OCR) | ⭐ |
+| **Amazon Kendra** | Intelligent enterprise search | ⭐ |
+| **Amazon Personalize** | Recommendation engine | ⭐ |
+| **Amazon Fraud Detector** | Fraud detection | ⭐ |
+| **Amazon Augmented AI (A2I)** | Human review workflows | ⭐⭐ |
+| **Amazon Nova** | AWS foundation models in Bedrock | ⭐⭐ |
 
 ### Analytics Services
-| Service | Primary Use Case |
-|---------|------------------|
-| Amazon OpenSearch Service | Vector database, search |
-| AWS Glue | ETL and data cataloging |
-| AWS Glue DataBrew | Visual data preparation |
-| AWS Lake Formation | Data lake management |
-| Amazon Redshift | Data warehousing |
-| Amazon QuickSight | Business intelligence |
-| Amazon EMR | Big data processing |
+| Service | Primary Use Case | Priority |
+|---------|------------------|----------|
+| **AWS Glue** | ETL and data cataloging | ⭐⭐ |
+| **AWS Glue DataBrew** | Visual data preparation | ⭐ |
+| **Amazon OpenSearch Service** | Vector database, semantic search | ⭐⭐ |
+| **AWS Lake Formation** | Data lake management | ⭐ |
+| **Amazon Redshift** | Data warehousing | ⭐ |
+| **Amazon QuickSight** | Business intelligence, visualization | ⭐ |
+| **Amazon EMR** | Big data processing (Spark, Hadoop) | ⭐ |
+| **AWS Data Exchange** | Data marketplace | - |
 
 ### Database Services (Vector Storage)
-| Service | Primary Use Case |
-|---------|------------------|
-| Amazon RDS (PostgreSQL) | Relational DB with pgvector |
-| Amazon Aurora | Managed PostgreSQL with vector support |
-| Amazon Neptune | Graph database |
-| Amazon OpenSearch Service | Vector search engine |
-| Amazon DynamoDB | NoSQL database |
-| Amazon MemoryDB | In-memory database |
-| Amazon ElastiCache | Caching layer |
+| Service | Primary Use Case | Priority |
+|---------|------------------|----------|
+| **Amazon RDS (PostgreSQL)** | Relational DB with pgvector | ⭐ |
+| **Amazon Aurora** | Managed PostgreSQL with vector support | ⭐⭐ |
+| **Amazon Neptune** | Graph database with vectors | ⭐ |
+| **Amazon MemoryDB** | In-memory vector search | ⭐ |
+| **Amazon DynamoDB** | NoSQL database | ⭐ |
+| **Amazon ElastiCache** | Caching layer | - |
+| **Amazon DocumentDB** | MongoDB-compatible | - |
 
 ### Security & Governance Services
-| Service | Primary Use Case |
-|---------|------------------|
-| AWS IAM | Access management |
-| AWS KMS | Key management |
-| Amazon Macie | Data security/PII detection |
-| AWS CloudTrail | API activity logging |
-| AWS Config | Configuration compliance |
-| AWS Audit Manager | Audit automation |
-| AWS Artifact | Compliance documentation |
-| Amazon Inspector | Vulnerability assessment |
-| AWS Trusted Advisor | Best practice recommendations |
+| Service | Primary Use Case | Priority |
+|---------|------------------|----------|
+| **AWS IAM** | Access management (roles, policies) | ⭐⭐⭐ |
+| **AWS KMS** | Key management, encryption | ⭐⭐ |
+| **Amazon Macie** | Data security, PII detection | ⭐⭐ |
+| **AWS CloudTrail** | API activity logging, auditing | ⭐⭐ |
+| **Amazon CloudWatch** | Monitoring, logs, metrics | ⭐⭐ |
+| **AWS Config** | Configuration compliance | ⭐ |
+| **AWS Audit Manager** | Audit automation | ⭐ |
+| **AWS Artifact** | Compliance documentation | ⭐ |
+| **Amazon Inspector** | Vulnerability assessment | ⭐ |
+| **AWS Secrets Manager** | Store API keys, secrets | ⭐ |
+| **AWS Trusted Advisor** | Best practice recommendations | ⭐ |
+| **AWS Well-Architected Tool** | Architecture review | - |
+
+### Compute & Storage
+| Service | Primary Use Case | Priority |
+|---------|------------------|----------|
+| **Amazon S3** | Object storage, training data | ⭐⭐ |
+| **Amazon S3 Glacier** | Archive storage | - |
+| **Amazon EC2** | Compute instances | ⭐ |
+| **Amazon ECS/EKS** | Container orchestration | - |
+| **Amazon VPC** | Network isolation | ⭐ |
+| **Amazon CloudFront** | Content delivery | - |
 
 ---
 
@@ -133,3 +149,4 @@
 - [Domain 3: Applications of Foundation Models](./03-domain3-foundation-models.md)
 - [Domain 4: Guidelines for Responsible AI](./04-domain4-responsible-ai.md)
 - [Domain 5: Security, Compliance, and Governance](./05-domain5-security-compliance-governance.md)
+- [**Quick Reference Card (1-page summary)**](./06-quick-reference-card.md)

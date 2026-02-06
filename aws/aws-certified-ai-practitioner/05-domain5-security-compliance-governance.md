@@ -28,6 +28,17 @@
 
 > **Exam Tip:** Customer is responsible for data, access, and how they use AI services!
 
+#### Bedrock-Specific Shared Responsibility
+
+| AWS Manages | Customer Manages |
+|-------------|------------------|
+| Model hosting infrastructure | Prompt engineering |
+| API availability | Guardrails configuration |
+| Network encryption | Data used with models |
+| Service scaling | Knowledge base content |
+| Model updates | Custom model training data |
+| Regional availability | Compliance requirements |
+
 ---
 
 ### Security Considerations for AI Systems
@@ -65,6 +76,27 @@
 | **Data Integrity** | Ensure data hasn't been tampered with |
 | **Data Classification** | Categorize data sensitivity levels |
 | **Data Encryption** | Protect data at rest and in transit |
+
+#### Privacy-Enhancing Technologies (PETs)
+
+| Technology | Description | Use Case |
+|------------|-------------|----------|
+| **Data Anonymization** | Remove identifying information | Training data privacy |
+| **Differential Privacy** | Add noise to preserve privacy | Aggregate analysis |
+| **Federated Learning** | Train on distributed data | Cross-organization ML |
+| **Homomorphic Encryption** | Compute on encrypted data | Secure inference |
+| **Synthetic Data** | Generate artificial data | Testing, training |
+| **Data Masking** | Replace sensitive data | Development environments |
+
+#### Encryption in AWS AI
+
+| Type | Service | Key Management |
+|------|---------|----------------|
+| **At Rest** | S3, EBS, SageMaker | AWS KMS, CMK |
+| **In Transit** | All services | TLS 1.2+ |
+| **Model Artifacts** | SageMaker | KMS encryption |
+| **Training Data** | S3 | Server-side encryption |
+| **Bedrock Data** | Bedrock | AWS-managed keys |
 
 ---
 
@@ -221,11 +253,37 @@ The Generative AI Security Scoping Matrix helps organizations:
 
 ## Exam Tips for Domain 5
 
-1. **Know the shared responsibility model:** AWS manages infra, you manage data and access
-2. **Security services mapping:** IAM for access, KMS for encryption, Macie for PII
-3. **Governance services:** Config for compliance, CloudTrail for auditing, Artifact for reports
-4. **Prompt injection is testable:** Understand the attack and mitigations
-5. **Data lifecycle:** Know the stages from collection to deletion
-6. **Logging is critical:** CloudTrail logs everything, use it for audit trails
-7. **PrivateLink:** Key for keeping AI traffic off public internet
-8. **Governance frameworks:** Know that structured approaches exist (scoping matrix)
+1. **Shared responsibility model:**
+   - AWS = infrastructure, platform security
+   - Customer = data, access, content moderation
+   - Bedrock: You manage prompts, guardrails, training data
+2. **Security services mapping:**
+   - IAM = access control (who can do what)
+   - KMS = encryption keys
+   - Macie = detect PII in data
+   - PrivateLink = private network access to Bedrock
+   - Secrets Manager = store API keys
+3. **Governance services:**
+   - Config = track configurations
+   - CloudTrail = audit API calls
+   - Artifact = compliance documentation
+   - Audit Manager = prepare for audits
+4. **Prompt injection attacks:**
+   - Direct = malicious user input
+   - Indirect = hidden in retrieved content
+   - Mitigation = input validation + Guardrails
+5. **Data lifecycle stages:**
+   - Collection → Storage → Processing → Usage → Archival → Deletion
+6. **Privacy-Enhancing Technologies:**
+   - Anonymization, differential privacy
+   - Synthetic data, data masking
+7. **Encryption:**
+   - At rest = KMS
+   - In transit = TLS 1.2+
+8. **Logging for compliance:**
+   - CloudTrail = all API calls
+   - CloudWatch = metrics, logs
+   - Bedrock logs = model invocations
+9. **PrivateLink:** Keep Bedrock traffic off public internet
+10. **Compliance programs:** SOC, ISO 27001, HIPAA, GDPR, PCI DSS
+

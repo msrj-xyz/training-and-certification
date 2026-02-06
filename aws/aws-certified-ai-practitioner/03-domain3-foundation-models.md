@@ -38,6 +38,15 @@
 | **0.4 - 0.7** | Balanced creativity and accuracy | General conversation |
 | **0.8 - 1.0** | Creative, varied responses | Creative writing, brainstorming |
 
+#### Parameter Combinations
+
+| Scenario | Temperature | Top-p | Top-k |
+|----------|-------------|-------|-------|
+| **Factual Q&A** | 0.1-0.3 | 0.9 | - |
+| **Code Generation** | 0.0-0.2 | 0.95 | - |
+| **Creative Writing** | 0.8-1.0 | 0.95 | 40-100 |
+| **Summarization** | 0.3-0.5 | 0.9 | - |
+
 > **Exam Tip:** Lower temperature = more deterministic, higher = more creative/random
 
 ---
@@ -73,6 +82,25 @@ FM + Context → Grounded Response
 | **Vector Database** | OpenSearch Service, Aurora, RDS PostgreSQL, Neptune |
 | **Foundation Model** | Amazon Bedrock FMs |
 
+#### RAG Chunking Strategies
+
+| Strategy | Description | Best For |
+|----------|-------------|----------|
+| **Fixed-size** | Split by character/token count | Simple implementation |
+| **Sentence-based** | Split at sentence boundaries | Natural language |
+| **Paragraph-based** | Split at paragraphs | Document structure |
+| **Semantic** | Split by meaning/topic | Contextual relevance |
+| **Recursive** | Hierarchical splitting | Complex documents |
+
+#### Chunk Size Trade-offs
+
+| Smaller Chunks | Larger Chunks |
+|----------------|---------------|
+| More precise retrieval | More context preserved |
+| May lose context | May include irrelevant info |
+| More chunks to search | Fewer chunks to search |
+| Lower embedding cost | Higher embedding cost |
+
 ---
 
 ### Vector Databases on AWS
@@ -84,6 +112,15 @@ FM + Context → Grounded Response
 | **Amazon RDS for PostgreSQL** | PostgreSQL with pgvector | Standard vector storage |
 | **Amazon Neptune** | Graph database | Knowledge graphs + vectors |
 | **Amazon MemoryDB** | In-memory with vector search | Low-latency applications |
+
+#### Vector Similarity Metrics
+
+| Metric | Description | Use Case |
+|--------|-------------|----------|
+| **Cosine Similarity** | Angle between vectors | Text similarity (most common) |
+| **Euclidean Distance** | Straight-line distance | Image similarity |
+| **Dot Product** | Magnitude + direction | Normalized embeddings |
+| **Manhattan Distance** | Sum of absolute differences | Sparse vectors |
 
 ---
 
@@ -217,6 +254,34 @@ Agents are AI systems that can autonomously perform multi-step tasks by breaking
 | **Domain Adaptation** | Training on domain-specific data | Specialized vocabulary/knowledge |
 | **Transfer Learning** | Applying learned knowledge to new tasks | Similar task applications |
 | **RLHF** | Learning from human feedback | Preference alignment |
+| **LoRA** | Low-rank adaptation (parameter-efficient) | Resource-constrained fine-tuning |
+| **QLoRA** | Quantized LoRA | Even more efficient fine-tuning |
+
+#### RLHF (Reinforcement Learning from Human Feedback) Process
+
+```
+1. Pre-train base model on large corpus
+    ↓
+2. Generate diverse outputs for prompts
+    ↓
+3. Human annotators rank/rate outputs
+    ↓
+4. Train reward model on human preferences
+    ↓
+5. Fine-tune FM using reward model with RL (PPO)
+    ↓
+6. Iterate with more human feedback
+```
+
+#### Fine-tuning Cost vs Benefit
+
+| Approach | Data Needed | Cost | Control | Speed |
+|----------|-------------|------|---------|-------|
+| Prompt Engineering | 0 | Free | Low | Instant |
+| Few-shot Learning | 2-10 | Free | Medium | Instant |
+| RAG | 10s-1000s docs | Low | Medium | Hours |
+| Fine-tuning | 100s-10000s | High | High | Days |
+| Pre-training | Millions | Very High | Full | Weeks |
 
 ---
 
@@ -291,11 +356,32 @@ Agents are AI systems that can autonomously perform multi-step tasks by breaking
 
 ## Exam Tips for Domain 3
 
-1. **RAG is critical:** Understand the flow: embed → search → retrieve → generate
-2. **Know your temperatures:** Low = deterministic, High = creative
-3. **Memorize prompt techniques:** Zero-shot, few-shot, chain-of-thought
-4. **Understand customization trade-offs:** Cost vs. control vs. effort
-5. **Know evaluation metrics:** ROUGE for summarization, BLEU for translation
-6. **Agents are emerging:** Understand multi-step task orchestration
-7. **Prompt security matters:** Know the risks (injection, jailbreaking)
-8. **Vector databases:** Know which AWS services support vector storage
+1. **RAG is critical:** 
+   - Flow: embed → search → retrieve → generate
+   - Use for current information, domain-specific data
+   - Bedrock Knowledge Bases is the AWS implementation
+2. **Temperature settings:**
+   - 0.0-0.3 = factual, code generation
+   - 0.8-1.0 = creative writing
+3. **Prompt techniques:**
+   - Zero-shot = no examples
+   - Few-shot = 2-5 examples
+   - Chain-of-thought = step-by-step reasoning
+4. **Customization hierarchy (cost/control):**
+   - Prompt engineering → Few-shot → RAG → Fine-tuning → Pre-training
+5. **Evaluation metrics:**
+   - ROUGE = summarization
+   - BLEU = translation
+   - BERTScore = semantic similarity
+   - Perplexity = language model quality
+6. **Agents:** Multi-step automation using Bedrock Agents
+7. **Prompt security:**
+   - Injection = malicious user input
+   - Jailbreaking = bypassing safety
+   - Use Guardrails for protection
+8. **Vector databases:** OpenSearch, Aurora pgvector, MemoryDB
+9. **Chunking strategy:** Balance between precision and context
+10. **RLHF:** Know the process for preference alignment
+11. **Fine-tuning efficiency:** LoRA/QLoRA for parameter-efficient training
+12. **Cosine similarity:** Most common metric for text vector search
+

@@ -288,11 +288,48 @@
 
 ## Exam Tips for Domain 4
 
-1. **Model Monitor** - Four types: Data Quality, Model Quality, Bias, Feature Attribution
-2. **Data vs Concept Drift** - Input distribution vs target relationship
-3. **Inference Recommender** - Right-size inference instances
-4. **Cost Optimization** - Spot training, Savings Plans, right-sizing
-5. **IAM Execution Role** - SageMaker needs role to access resources
-6. **VPC Endpoints** - Private access to SageMaker APIs
-7. **KMS** - Encrypt model artifacts, EBS, S3
-8. **CloudTrail** - Audit all SageMaker API calls
+1. **Model Monitor types:**
+   - Data Quality = input distribution drift
+   - Model Quality = accuracy degradation
+   - Bias Drift = fairness over time
+   - Feature Attribution = importance changes
+2. **Drift types:**
+   - Data drift = input distribution changes
+   - Concept drift = target relationship changes
+   - Know the difference!
+3. **SageMaker Inference Recommender:**
+   - Benchmarks on different instances
+   - Recommends optimal config
+   - Balances latency vs cost
+4. **Cost optimization:**
+   - Spot instances = 70-90% training savings
+   - Savings Plans = committed use
+   - Right-sizing with Inference Recommender
+   - Resource tagging for allocation
+5. **IAM for SageMaker:**
+   - Execution Role = job permissions to AWS
+   - sagemaker:InvokeEndpoint = inference permission
+   - Least privilege principle
+   - SageMaker Role Manager = pre-built personas
+6. **VPC configuration:**
+   - VPC Endpoints = private API access
+   - Gateway Endpoints = S3, DynamoDB (free)
+   - Interface Endpoints = other services
+7. **Encryption:**
+   - KMS for model artifacts
+   - KMS for EBS volumes
+   - TLS for in-transit
+   - Inter-container encryption for distributed
+8. **Audit and compliance:**
+   - CloudTrail = all SageMaker API calls
+   - AWS Config = configuration compliance
+   - Security Hub = aggregated findings
+9. **Data Capture:**
+   - Input/output logging
+   - Sampling percentage config
+   - S3 destination
+10. **A/B Testing:**
+    - Production variants = traffic split
+    - Shadow variant = parallel, no traffic
+    - Canary = gradual rollout
+

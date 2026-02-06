@@ -180,3 +180,4 @@
 - [Domain 2: ML Model Development](./02-domain2-model-development.md)
 - [Domain 3: Deployment and Orchestration](./03-domain3-deployment-orchestration.md)
 - [Domain 4: Monitoring, Maintenance, and Security](./04-domain4-monitoring-security.md)
+- [**Quick Reference Card (1-page summary)**](./05-quick-reference-card.md)

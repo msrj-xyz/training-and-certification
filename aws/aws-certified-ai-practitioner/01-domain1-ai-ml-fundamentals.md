@@ -12,6 +12,8 @@
 | **Neural Networks** | Computing systems inspired by biological brain structure | Foundation for deep learning |
 | **Generative AI (GenAI)** | AI that creates new content (text, images, audio, code) | Newest evolution, uses foundation models |
 | **Large Language Models (LLMs)** | AI models trained on massive text datasets | Powers chatbots, text generation |
+| **Foundation Models** | Large pre-trained models adaptable to many tasks | Base for fine-tuning (GPT, Claude, Titan) |
+| **Transfer Learning** | Using pre-trained models on new tasks | Reduces training time and data needs |
 
 ### Hierarchy to Remember
 ```
@@ -25,7 +27,34 @@ AI (broadest) → ML (subset) → Deep Learning (subset) → GenAI (application 
 | Data Requirements | Moderate | Large | Very Large |
 | Feature Engineering | Manual | Automatic | Pre-trained |
 | Model Complexity | Low-Medium | High | Very High |
+| Interpretability | High | Low | Very Low |
+| Training Time | Minutes-Hours | Hours-Days | Days-Weeks |
 | Use Case | Predictions | Complex patterns | Content creation |
+
+---
+
+### Neural Network Fundamentals
+
+| Component | Description | Purpose |
+|-----------|-------------|---------|
+| **Input Layer** | Receives raw data | Data entry point |
+| **Hidden Layers** | Process and transform data | Feature extraction |
+| **Output Layer** | Produces final prediction | Decision/result |
+| **Neurons/Nodes** | Processing units | Weighted sum + activation |
+| **Weights** | Connection strengths | Learned parameters |
+| **Bias** | Offset value | Adjusts activation threshold |
+| **Activation Function** | Non-linear transformation | Enables complex patterns |
+
+#### Common Activation Functions
+
+| Function | Range | Use Case |
+|----------|-------|----------|
+| **ReLU** | [0, ∞) | Most hidden layers (default) |
+| **Sigmoid** | [0, 1] | Binary classification output |
+| **Softmax** | [0, 1] (sum=1) | Multi-class classification |
+| **Tanh** | [-1, 1] | Hidden layers (older networks) |
+
+> **Exam Tip:** ReLU is most common for hidden layers; Sigmoid for binary output; Softmax for multi-class!
 
 ---
 
@@ -50,9 +79,40 @@ AI (broadest) → ML (subset) → Deep Learning (subset) → GenAI (application 
 |------|--------------|-----------|--------------|
 | **Supervised Learning** | Learns from labeled data (input-output pairs) | Classification, regression, prediction | SageMaker, Comprehend |
 | **Unsupervised Learning** | Finds patterns in unlabeled data | Clustering, anomaly detection, dimensionality reduction | SageMaker |
+| **Semi-Supervised Learning** | Combines small labeled + large unlabeled data | When labeling is expensive | SageMaker |
 | **Reinforcement Learning** | Agent learns through trial and error with rewards | Robotics, game playing, autonomous systems | SageMaker |
+| **Self-Supervised Learning** | Creates labels from data structure | Language models, embeddings | Bedrock, SageMaker |
 
 > **Exam Tip:** Know which learning type applies to which business problem!
+
+---
+
+### Common ML Algorithms
+
+#### Supervised Learning Algorithms
+
+| Algorithm | Type | Best For | Key Characteristics |
+|-----------|------|----------|--------------------|
+| **Linear Regression** | Regression | Continuous predictions | Fast, interpretable |
+| **Logistic Regression** | Classification | Binary outcomes | Probability output |
+| **Decision Trees** | Both | Interpretable models | Easy to visualize |
+| **Random Forest** | Both | General purpose | Ensemble of trees |
+| **XGBoost** | Both | Structured data | High accuracy, fast |
+| **Neural Networks** | Both | Complex patterns | Needs lots of data |
+| **SVM (Support Vector Machine)** | Classification | High-dimensional data | Works well with small data |
+| **K-Nearest Neighbors (KNN)** | Both | Simple classification | No training phase |
+
+#### Unsupervised Learning Algorithms
+
+| Algorithm | Type | Best For | Key Characteristics |
+|-----------|------|----------|--------------------|
+| **K-Means** | Clustering | Customer segmentation | Needs K specified |
+| **DBSCAN** | Clustering | Arbitrary shapes | Finds outliers |
+| **PCA** | Dimensionality Reduction | Feature reduction | Preserves variance |
+| **t-SNE** | Dimensionality Reduction | Visualization | 2D/3D projections |
+| **Isolation Forest** | Anomaly Detection | Fraud detection | Fast, scalable |
+
+> **Exam Tip:** XGBoost is the most popular algorithm for structured/tabular data on AWS!
 
 ---
 
@@ -74,9 +134,33 @@ AI (broadest) → ML (subset) → Deep Learning (subset) → GenAI (application 
 | **Model** | Mathematical representation learned from data | Output of training process |
 | **Algorithm** | Method/procedure used for training | Decision trees, neural networks, etc. |
 | **Bias** | Systematic error in predictions | Can affect fairness, needs monitoring |
+| **Variance** | Sensitivity to training data | High variance = overfitting |
 | **Fairness** | Equal treatment across groups | Responsible AI consideration |
-| **Overfitting** | Model too specific to training data | Poor generalization |
-| **Underfitting** | Model too simple for data | Poor performance overall |
+| **Overfitting** | Model too specific to training data | Poor generalization (high variance) |
+| **Underfitting** | Model too simple for data | Poor performance (high bias) |
+
+---
+
+### Hyperparameters vs Parameters
+
+| Aspect | Parameters | Hyperparameters |
+|--------|------------|----------------|
+| **Definition** | Learned during training | Set before training |
+| **Examples** | Weights, biases | Learning rate, epochs, batch size |
+| **Optimization** | Gradient descent | Manual tuning or AutoML |
+| **When Set** | Automatically | By practitioner |
+
+#### Common Hyperparameters
+
+| Hyperparameter | Description | Impact |
+|----------------|-------------|--------|
+| **Learning Rate** | Step size for updates | Too high = unstable; too low = slow |
+| **Epochs** | Training iterations | More = better fit (risk of overfitting) |
+| **Batch Size** | Samples per update | Smaller = more updates, slower |
+| **Number of Layers** | Neural network depth | More = complex patterns |
+| **Regularization** | Penalty for complexity | Prevents overfitting (L1, L2, Dropout) |
+
+> **Exam Tip:** SageMaker Automatic Model Tuning (AMT) optimizes hyperparameters automatically!
 
 ---
 
@@ -212,16 +296,44 @@ Hyperparameter Tuning → Evaluation → Deployment → Monitoring
 
 ### Model Metrics
 
-#### Performance Metrics (Technical)
+#### Confusion Matrix (Classification)
 
-| Metric | Use For | Description |
-|--------|---------|-------------|
-| **Accuracy** | Classification | Percentage of correct predictions |
-| **AUC (Area Under Curve)** | Binary classification | Model's ability to distinguish classes |
-| **F1 Score** | Imbalanced datasets | Harmonic mean of precision and recall |
-| **Precision** | When false positives are costly | Correct positive predictions |
-| **Recall** | When false negatives are costly | Captured positive cases |
-| **RMSE** | Regression | Root mean squared error |
+```
+                    Predicted
+                 Positive  Negative
+Actual Positive    TP        FN
+       Negative    FP        TN
+```
+
+| Term | Definition | Example |
+|------|------------|---------|
+| **True Positive (TP)** | Correctly predicted positive | Spam correctly flagged |
+| **True Negative (TN)** | Correctly predicted negative | Ham correctly passed |
+| **False Positive (FP)** | Type I Error - incorrectly positive | Ham flagged as spam |
+| **False Negative (FN)** | Type II Error - incorrectly negative | Spam missed to inbox |
+
+#### Classification Metrics
+
+| Metric | Formula | Use When | Range |
+|--------|---------|----------|-------|
+| **Accuracy** | (TP+TN) / Total | Balanced classes | 0-1 |
+| **Precision** | TP / (TP+FP) | False positives costly (spam filter) | 0-1 |
+| **Recall (Sensitivity)** | TP / (TP+FN) | False negatives costly (disease detection) | 0-1 |
+| **Specificity** | TN / (TN+FP) | True negative rate important | 0-1 |
+| **F1 Score** | 2 × (Precision × Recall) / (Precision + Recall) | Imbalanced datasets | 0-1 |
+| **AUC-ROC** | Area under ROC curve | Ranking/threshold selection | 0-1 |
+
+> **Exam Tip:** Precision vs Recall trade-off - improving one typically decreases the other!
+
+#### Regression Metrics
+
+| Metric | Formula | Interpretation |
+|--------|---------|----------------|
+| **MSE** | Mean[(y - ŷ)²] | Average squared error (penalizes large errors) |
+| **RMSE** | √MSE | Same units as target |
+| **MAE** | Mean[|y - ŷ|] | Average absolute error |
+| **R²** | 1 - (SS_res/SS_tot) | Proportion of variance explained (0-1) |
+| **MAPE** | Mean[|y - ŷ|/y × 100] | Percentage error |
 
 #### Business Metrics
 
@@ -232,14 +344,40 @@ Hyperparameter Tuning → Evaluation → Deployment → Monitoring
 | **Customer Feedback** | Qualitative satisfaction measure |
 | **ROI (Return on Investment)** | Overall business value generated |
 | **Conversion Rate** | Business impact measurement |
+| **Time to Value** | Speed of deployment and adoption |
+| **Customer Lifetime Value** | Long-term revenue impact |
 
 ---
 
 ## Exam Tips for Domain 1
 
-1. **Know the hierarchy:** AI → ML → Deep Learning → GenAI
-2. **Match learning types to scenarios:** Supervised = labeled data, Unsupervised = patterns, Reinforcement = rewards
+1. **Know the hierarchy:** AI → ML → Deep Learning → GenAI (Foundation Models → LLMs)
+2. **Match learning types to scenarios:**
+   - Supervised = labeled data (classification, regression)
+   - Unsupervised = patterns without labels (clustering, anomaly)
+   - Reinforcement = rewards and actions (robotics, games)
+   - Semi-Supervised = small labeled + large unlabeled
 3. **Understand when NOT to use AI/ML:** This is commonly tested
-4. **Know AWS services by use case:** Match the right service to the problem
-5. **Remember MLOps concepts:** Experimentation, monitoring, retraining cycle
-6. **Differentiate metrics:** Technical (AUC, F1) vs. Business (ROI, cost)
+   - Deterministic outcomes needed
+   - Insufficient data
+   - Simple rule-based logic works
+4. **Know AWS services by use case:**
+   - SageMaker = custom ML
+   - Bedrock = GenAI/Foundation Models
+   - Rekognition = images/video
+   - Comprehend = text/NLP
+   - Transcribe = speech-to-text
+   - Lex = conversational bots
+5. **Metrics awareness:**
+   - Precision = minimize false positives (spam filter)
+   - Recall = minimize false negatives (disease detection)
+   - F1 = imbalanced datasets
+   - Accuracy = balanced datasets only!
+6. **MLOps lifecycle:** Data → Train → Evaluate → Deploy → Monitor → Retrain
+7. **Overfitting vs Underfitting:**
+   - Overfitting = high variance, too complex, memorizes training data
+   - Underfitting = high bias, too simple, misses patterns
+8. **XGBoost** is the go-to algorithm for structured/tabular data on AWS
+9. **Real-time vs Batch inference:** Know cost vs latency trade-offs
+10. **Transfer Learning** saves time and data by using pre-trained models
+

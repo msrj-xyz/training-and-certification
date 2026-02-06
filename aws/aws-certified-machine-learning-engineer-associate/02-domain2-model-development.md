@@ -295,11 +295,44 @@
 
 ## Exam Tips for Domain 2
 
-1. **XGBoost** - Default choice for structured data
-2. **Built-in Algorithms** - Know when to use each
-3. **Hyperparameter Tuning** - Bayesian optimization most efficient
-4. **Regularization** - L1 for sparsity, L2 for small weights
-5. **Overfitting** - High training, low validation performance
-6. **Clarify** - Bias detection AND explainability
-7. **Model Registry** - Version control for models
-8. **F1 Score** - Use for imbalanced classification
+1. **Algorithm selection:**
+   - XGBoost = default for structured/tabular data
+   - Linear Learner = linear relationships
+   - DeepAR = time series forecasting
+   - Random Cut Forest = anomaly detection
+2. **Hyperparameter tuning:**
+   - Bayesian optimization = most efficient
+   - Warm start = reuse previous tuning results
+   - Hyperband = combine early stopping + random
+3. **Regularization techniques:**
+   - L1 (Lasso) = feature selection, sparsity
+   - L2 (Ridge) = small weights, reduce overfitting
+   - Dropout = neural networks only
+4. **Overfitting indicators:**
+   - Low training error + high validation error
+   - Solutions: more data, regularization, simpler model
+5. **SageMaker Clarify:**
+   - Bias detection = pre/post training
+   - Explainability = SHAP values
+   - Model Cards = documentation
+6. **Model Registry:**
+   - Version control for models
+   - Approval workflows
+   - Lineage tracking
+7. **Evaluation metrics:**
+   - F1 Score = imbalanced classification
+   - AUC-ROC = ranking quality
+   - RMSE = regression
+8. **Built-in frameworks:**
+   - TensorFlow, PyTorch = pre-built containers
+   - Script Mode = your code in AWS container
+   - BYOC = Bring Your Own Container
+9. **Distributed training:**
+   - Data Parallel = split data across GPUs
+   - Model Parallel = split model across GPUs
+   - Use for large models/datasets
+10. **Model optimization:**
+    - Pruning = remove weights
+    - Quantization = FP16/INT8
+    - Knowledge distillation = student model
+

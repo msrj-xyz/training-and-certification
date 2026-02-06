@@ -249,11 +249,47 @@
 
 ## Exam Tips for Domain 3
 
-1. **Endpoint Types** - Know when to use each (real-time, async, serverless, batch)
-2. **Serverless** - Cold start trade-off, variable traffic
-3. **Async Endpoints** - Large payloads, long processing
-4. **Spot Instances** - Managed Spot Training with checkpoints
-5. **SageMaker Pipelines** - Native ML workflow orchestration
-6. **CodePipeline** - General CI/CD, integrates with SageMaker
-7. **Blue/Green** - Safest deployment strategy
-8. **Auto Scaling** - InvocationsPerInstance common metric
+1. **Endpoint type selection:**
+   - Real-time = consistent traffic, low latency
+   - Serverless = variable/unpredictable traffic
+   - Asynchronous = large payloads (>6MB), long processing
+   - Batch Transform = large datasets, no endpoint needed
+2. **Serverless endpoints:**
+   - Cold start trade-off
+   - 1-6 GB memory config
+   - Max 15 min timeout
+   - Pay per inference
+3. **Async endpoints:**
+   - Up to 1 hour timeout
+   - Can scale to zero
+   - S3 input/output
+   - SNS notifications
+4. **Cost optimization:**
+   - Managed Spot Training = 70-90% savings
+   - Checkpoints handle interruptions
+   - Multi-Model Endpoints = share resources
+5. **SageMaker Pipelines:**
+   - Native ML workflow orchestration
+   - Step types: Processing, Training, Tuning, Transform
+   - Callback steps for human approval
+6. **CI/CD for ML:**
+   - CodePipeline = orchestration
+   - CodeBuild = build and test
+   - Model Registry = version control
+7. **Deployment strategies:**
+   - Blue/Green = safest, full rollback
+   - Canary = gradual traffic shift
+   - Shadow = parallel inference, no traffic
+8. **Auto Scaling:**
+   - InvocationsPerInstance = common metric
+   - Target tracking = maintain target value
+   - Scale on latency or errors
+9. **Instance selection:**
+   - ml.g4dn = cost-effective GPU inference
+   - ml.inf1 = Inferentia, optimized inference
+   - ml.trn1 = Trainium, optimized training
+10. **SageMaker Neo:**
+    - Model compilation for hardware
+    - Up to 2x performance improvement
+    - Edge deployment support
+
