@@ -37,14 +37,58 @@
 
 ---
 
-### AWS IAM Identity Center (SSO)
+### AWS IAM Identity Center (SSO) ⭐
 
 | Feature | Description |
 |---------|-------------|
-| **Identity Source** | AD, external IdP |
-| **Permission Sets** | Managed policies |
+| **Identity Source** | AD, external IdP, Identity Center |
+| **Permission Sets** | Managed/custom policies |
 | **Account Assignments** | Multi-account access |
 | **ABAC** | Attribute-based access |
+| **Session Duration** | Configurable (1-12 hours) |
+
+---
+
+### IAM Permissions Boundaries ⭐
+
+| Concept | Description |
+|---------|-------------|
+| **Purpose** | Maximum permissions limit |
+| **Delegation** | Safely delegate admin rights |
+| **Scope** | Only for users and roles |
+| **Evaluation** | Intersection with identity policy |
+
+```json
+// Permissions Boundary Example
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": ["s3:*", "cloudwatch:*", "ec2:Describe*"],
+      "Resource": "*"
+    },
+    {
+      "Effect": "Deny",
+      "Action": ["iam:*", "organizations:*"],
+      "Resource": "*"
+    }
+  ]
+}
+```
+
+> **Exam Tip:** Permissions Boundary = guardrail, NOT a grant! Final permissions = Identity Policy ∩ Boundary
+
+---
+
+### Attribute-Based Access Control (ABAC) ⭐
+
+| Concept | Description |
+|---------|-------------|
+| **Tags** | Resource and principal tags |
+| **Condition Keys** | aws:ResourceTag, aws:PrincipalTag |
+| **Scalability** | No policy updates for new resources |
+| **Flexibility** | Dynamic access based on attributes |
 
 ---
 
@@ -172,6 +216,31 @@
 | **Stateless Rules** | Packet filtering |
 | **Domain Filtering** | Allow/block domains |
 | **Suricata** | IDS/IPS rules |
+
+---
+
+### Defense in Depth Pattern ⭐
+
+| Layer | Services |
+|-------|----------|
+| **Edge** | CloudFront, WAF, Shield |
+| **VPC** | Security Groups, NACLs, Network Firewall |
+| **Compute** | Inspector, GuardDuty |
+| **Data** | KMS, Macie, S3 policies |
+| **Identity** | IAM, Identity Center, SCPs |
+| **Audit** | CloudTrail, Config, Security Hub |
+
+#### Security Hub Integrations
+| Service | Finding Type |
+|---------|--------------|
+| **GuardDuty** | Threat detection |
+| **Inspector** | Vulnerability findings |
+| **Macie** | Sensitive data exposure |
+| **Firewall Manager** | Policy compliance |
+| **IAM Access Analyzer** | External access findings |
+| **Config** | Compliance status |
+
+> **Exam Tip:** Security Hub aggregates findings from multiple services - central security visibility!
 
 ---
 

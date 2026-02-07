@@ -81,6 +81,31 @@
 
 ---
 
+### CloudWatch Metric Streams ⭐
+
+| Feature | Description |
+|---------|-------------|
+| **Real-time Export** | Near real-time metric streaming |
+| **Firehose Destination** | Stream to S3, Redshift, OpenSearch |
+| **Filters** | Include/exclude namespaces |
+| **Format** | JSON or OpenTelemetry |
+
+```yaml
+# Metric Stream to S3 via Firehose
+MetricStream:
+  Type: AWS::CloudWatch::MetricStream
+  Properties:
+    FirehoseArn: !GetAtt DeliveryStream.Arn
+    OutputFormat: json
+    IncludeFilters:
+      - Namespace: AWS/EC2
+      - Namespace: AWS/Lambda
+```
+
+> **Exam Tip:** Metric Streams are the modern way to export CloudWatch metrics to external monitoring tools!
+
+---
+
 ### CloudWatch Logs Insights ⭐
 
 | Feature | Description |
@@ -187,7 +212,7 @@ fields @timestamp, latency
 
 ## Task 4.4: Infrastructure Monitoring
 
-### AWS Config
+### AWS Config ⭐
 
 | Feature | Description |
 |---------|-------------|
@@ -196,6 +221,38 @@ fields @timestamp, latency
 | **Remediation** | Auto-fix non-compliant |
 | **Conformance Packs** | Rule bundles |
 | **Aggregator** | Multi-account view |
+
+#### AWS Config Auto-Remediation ⭐
+| Component | Description |
+|-----------|-------------|
+| **SSM Automation** | Remediation action document |
+| **Auto-remediation** | Automatic fix on detection |
+| **Manual remediation** | Requires approval |
+| **Retry** | Configurable retry attempts |
+| **Exceptions** | Skip specific resources |
+
+```yaml
+# Config Rule with Auto-Remediation
+ConfigRule:
+  Type: AWS::Config::ConfigRule
+  Properties:
+    ConfigRuleName: s3-bucket-public-read-prohibited
+    Source:
+      Owner: AWS
+      SourceIdentifier: S3_BUCKET_PUBLIC_READ_PROHIBITED
+
+RemediationConfiguration:
+  Type: AWS::Config::RemediationConfiguration
+  Properties:
+    ConfigRuleName: !Ref ConfigRule
+    TargetType: SSM_DOCUMENT
+    TargetId: AWS-DisableS3BucketPublicReadWrite
+    Automatic: true
+    MaximumAutomaticAttempts: 3
+    RetryAttemptSeconds: 60
+```
+
+> **Exam Tip:** Config + SSM Automation = powerful auto-remediation for compliance!
 
 ---
 

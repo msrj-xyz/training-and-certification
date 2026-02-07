@@ -68,6 +68,34 @@
 
 ---
 
+### CloudFormation Drift Detection ⭐
+
+| Status | Description |
+|--------|-------------|
+| **IN_SYNC** | Resource matches template |
+| **MODIFIED** | Resource properties changed |
+| **DELETED** | Resource was deleted |
+| **NOT_CHECKED** | Never checked for drift |
+
+#### Drift Detection Workflow
+1. **Detect Drift** → On stack or specific resource
+2. **View Differences** → Compare expected vs actual
+3. **Remediate** → Update stack or import resource
+4. **Automate** → EventBridge rule for drift alerts
+
+```bash
+# Detect drift on stack
+aws cloudformation detect-stack-drift --stack-name my-stack
+
+# Check drift status
+aws cloudformation describe-stack-drift-detection-status \
+    --stack-drift-detection-id <id>
+```
+
+> **Exam Tip:** Drift Detection helps maintain IaC compliance - critical for audits!
+
+---
+
 ### CloudFormation StackSets ⭐
 
 | Feature | Description |
@@ -207,6 +235,27 @@ Password: '{{resolve:secretsmanager:my-secret:SecretString:password}}'
 | **Environments** | Shared infrastructure |
 | **Services** | Application deployments |
 | **Components** | Service extensions |
+
+---
+
+### AWS AppConfig ⭐
+
+| Feature | Description |
+|---------|-------------|
+| **Configuration Profiles** | Application settings |
+| **Feature Flags** | Toggle features dynamically |
+| **Deployment Strategies** | Gradual rollout |
+| **Validators** | JSON Schema, Lambda |
+| **Extensions** | Pre/post deployment hooks |
+
+#### Deployment Strategies
+| Strategy | Description |
+|----------|-------------|
+| **AllAtOnce** | Immediate deployment |
+| **Linear** | Equal increments over time |
+| **Exponential** | Growing deployment rate |
+
+> **Exam Tip:** AppConfig is for dynamic configuration - no redeploy needed!
 
 ---
 

@@ -155,9 +155,21 @@ Agents are AI systems that can autonomously perform multi-step tasks by breaking
 |---------|-------------|
 | **Amazon Bedrock Agents** | Fully managed agent capabilities |
 | **Agentic AI** | AI that can plan and execute autonomously |
-| **Model Context Protocol** | Standardizing how agents access data and tools |
+| **Model Context Protocol (MCP)** | Standardizing how agents access data and tools |
 | **Tool Use** | Agents calling external APIs/functions |
 | **Orchestration** | Managing multi-step workflows |
+
+#### Model Context Protocol (MCP) ⭐
+
+| Aspect | Description |
+|--------|-------------|
+| **Purpose** | Standard protocol for connecting AI models to external tools and data |
+| **Components** | Servers (provide resources), Clients (consume resources) |
+| **Resources** | Data sources, tools, prompts accessible to models |
+| **Benefits** | Interoperability, standardization, extensibility |
+| **Use Cases** | Database queries, API calls, file access, web browsing |
+
+> **Exam Tip:** MCP standardizes how agents and FMs access external context and tools!
 
 #### Agent Capabilities
 
@@ -243,6 +255,26 @@ Agents are AI systems that can autonomously perform multi-step tasks by breaking
 | **Fine-tuning** | Customizing pre-trained model for specific tasks |
 | **Continued Pre-training** | Extending knowledge with domain data |
 | **Distillation** | Creating smaller model from larger one |
+
+### Model Distillation ⭐
+
+| Aspect | Description |
+|--------|-------------|
+| **Purpose** | Transfer knowledge from large "teacher" model to smaller "student" model |
+| **Benefits** | Faster inference, lower cost, edge deployment |
+| **Trade-off** | Some capability loss for efficiency gains |
+| **Use Cases** | Mobile apps, real-time inference, cost reduction |
+
+#### Distillation Process
+```
+Teacher Model (Large) → Generate soft labels on training data
+         ↓
+Student Model (Small) → Learn to match teacher outputs
+         ↓
+Optimized Model → Smaller, faster, maintains key capabilities
+```
+
+> **Exam Tip:** Distillation creates smaller, faster models from larger ones - key for cost optimization!
 
 ---
 

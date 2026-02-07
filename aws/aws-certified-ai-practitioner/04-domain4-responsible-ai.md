@@ -96,6 +96,26 @@
 | **Carbon Footprint** | CO2 emissions from compute resources |
 | **Model Efficiency** | Performance per compute resource |
 
+### Environmental Sustainability in AI ⭐
+
+| Aspect | Description | Best Practice |
+|--------|-------------|---------------|
+| **Training Energy** | Large models require significant compute | Use pre-trained models when possible |
+| **Inference Costs** | Ongoing energy for serving | Choose right-sized models |
+| **Data Center Efficiency** | Infrastructure efficiency | AWS PUE (Power Usage Effectiveness) |
+| **Carbon Footprint** | CO2 emissions | Use AWS regions with renewable energy |
+| **Model Efficiency** | Performance per watt | Consider smaller, distilled models |
+
+#### AWS Sustainability Tools
+| Tool | Description |
+|------|-------------|
+| **AWS Customer Carbon Footprint Tool** | Track carbon emissions from AWS usage |
+| **Graviton Instances** | Energy-efficient ARM processors |
+| **Spot Instances** | Use spare capacity, reduce waste |
+| **Right-sizing** | Avoid over-provisioning resources |
+
+> **Exam Tip:** Responsible AI includes environmental considerations - smaller models = lower carbon footprint!
+
 ---
 
 ### AWS Tools for Responsible AI

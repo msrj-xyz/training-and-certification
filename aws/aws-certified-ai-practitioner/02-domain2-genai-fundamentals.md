@@ -212,6 +212,25 @@ Query × Key → Attention Weights → Weights × Value → Output
 | **Amazon SageMaker JumpStart** | Pre-built models and solutions | Quick ML deployment |
 | **Amazon Bedrock Data Automation** | Automated data processing with AI | Document processing |
 
+### Amazon Bedrock Data Automation ⭐
+
+| Feature | Description |
+|---------|-------------|
+| **Document Processing** | Extract information from documents (PDFs, images, forms) |
+| **Intelligent Extraction** | Use FMs to understand and extract structured data |
+| **No ML Expertise Needed** | Managed service - configure, don't build |
+| **Integration** | Works with S3, Lambda, workflows |
+
+#### Use Cases
+| Use Case | Description |
+|----------|-------------|
+| **Invoice Processing** | Extract line items, totals, vendor info |
+| **Form Analysis** | Parse application forms, surveys |
+| **Document Classification** | Categorize documents automatically |
+| **Data Entry Automation** | Reduce manual data entry |
+
+> **Exam Tip:** Bedrock Data Automation automates document understanding without building custom ML models!
+
 ---
 
 ### Amazon Bedrock Deep Dive

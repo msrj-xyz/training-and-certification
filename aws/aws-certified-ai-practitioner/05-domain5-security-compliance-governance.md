@@ -165,13 +165,34 @@
 
 ---
 
-### Generative AI Security Scoping Matrix
+### Generative AI Security Scoping Matrix ⭐
 
 The Generative AI Security Scoping Matrix helps organizations:
 - Assess security requirements based on use case
 - Identify appropriate controls
 - Match security measures to risk level
 - Ensure consistent security posture
+
+#### Security Scoping Dimensions
+
+| Dimension | Low Risk | Medium Risk | High Risk |
+|-----------|----------|-------------|-----------|
+| **Data Sensitivity** | Public data | Internal data | PII, financial, health |
+| **User Access** | Internal users | Business partners | Public internet |
+| **Model Type** | Pre-built APIs | Custom fine-tuned | Self-hosted |
+| **Output Usage** | Internal analysis | Customer-facing info | Automated decisions |
+
+#### Security Controls by Risk Level
+
+| Control | Low Risk | High Risk |
+|---------|----------|-----------|
+| **Authentication** | Basic IAM | MFA, federation |
+| **Network** | Public endpoint | PrivateLink, VPC |
+| **Encryption** | AWS-managed keys | CMK, HSM |
+| **Logging** | Basic CloudTrail | Detailed audit logs |
+| **Guardrails** | Default filters | Custom policies |
+
+> **Exam Tip:** Know the Security Scoping Matrix to match security controls to risk level!
 
 ---
 
